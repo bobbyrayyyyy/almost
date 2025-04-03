@@ -40,7 +40,7 @@ if uploaded_file:
     "    - **Question**: Phrase it as a conversational open-ended discovery question\n"
     "    - **Why this hits**: Explain why this question is likely to resonate, based on the context above\n\n"
     "Do not add fluff. These questions should be sharp, strategic, and visibly informed by the research provided."
-)
+             )
 
 
                 response = client.chat.completions.create(
