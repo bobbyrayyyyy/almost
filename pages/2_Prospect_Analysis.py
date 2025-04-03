@@ -6,6 +6,9 @@ st.title("🎯 Prospect Website Breakdown")
 
 url = st.text_input("Enter the prospect's website URL:", placeholder="https://prospect.com")
 
+if 'prospect_summary' not in st.session_state:
+    st.session_state['prospect_summary'] = None
+
 if st.button("Analyze Prospect"):
     with st.spinner("Scraping and breaking down content..."):
         try:
@@ -17,6 +20,7 @@ if st.button("Analyze Prospect"):
 
             if raw_content.strip():
                 gpt_output = parse_prospect_breakdown(raw_content)
+                st.session_state["prospect_summary"] = gpt_output
                 st.success("✅ GPT Output Below")
                 st.markdown(gpt_output)
             else:
