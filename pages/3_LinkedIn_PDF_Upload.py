@@ -23,30 +23,26 @@ if uploaded_file:
             if text.strip() and st.session_state.get("seller_summary") and st.session_state.get("prospect_summary"):
                 st.subheader("🧠 GPT-Powered Analysis")
 
-                full_prompt = f"""
-You are helping a sales rep prepare for outreach.
-
-Here's what we know:
-- Seller's company: {st.session_state['seller_summary']}
-- Prospect's company: {st.session_state['prospect_summary']}
-- This is the LinkedIn summary of the person they’re trying to reach: 
-
-"""{text}"""
-
-From this information, generate:
-1. A quick summary of what this person likely cares about professionally.
-2. Any friction points or priorities they may have given their company and role.
-3. What parts of the seller’s offering would likely resonate with them, and why.
-                """
-
                 from openai import OpenAI
                 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+
+                full_prompt = (
+                    "You are helping a sales rep prepare for outreach.\\n\\n"
+                    "Here's what we know:\\n"
+                    f"- Seller's company: {st.session_state['seller_summary']}\\n"
+                    f"- Prospect's company: {st.session_state['prospect_summary']}\\n"
+                    f"- This is the LinkedIn summary of the person they’re trying to reach:\\n\\n{text}\\n\\n"
+                    "From this information, generate:\\n"
+                    "1. A quick summary of what this person likely cares about professionally.\\n"
+                    "2. Any friction points or priorities they may have given their company and role.\\n"
+                    "3. What parts of the seller’s offering would likely resonate with them, and why."
+                )
 
                 response = client.chat.completions.create(
                     model="gpt-3.5-turbo",
                     messages=[
                         {"role": "system", "content": "You're a B2B sales strategy assistant."},
-                        {"role": "user", "content": full_prompt.strip()}
+                        {"role": "user", "content": full_prompt}
                     ],
                     temperature=0.5,
                     max_tokens=1000
