@@ -79,7 +79,7 @@ if uploaded_file:
                         {"role": "system", "content": "You're a B2B sales strategy assistant."},
                         {"role": "user", "content": full_prompt}
                     ],
-                    temperature=0.5,
+                    temperature=0.9,
                     max_tokens=1000
                 )
 
