@@ -27,16 +27,21 @@ if uploaded_file:
                 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
                 full_prompt = (
-                    "You are helping a sales rep prepare for outreach.\\n\\n"
-                    "Here's what we know:\\n"
-                    f"- Seller's company: {st.session_state['seller_summary']}\\n"
-                    f"- Prospect's company: {st.session_state['prospect_summary']}\\n"
-                    f"- This is the LinkedIn summary of the person they’re trying to reach:\\n\\n{text}\\n\\n"
-                    "From this information, generate:\\n"
-                    "1. A quick summary of what this person likely cares about professionally.\\n"
-                    "2. Any friction points or priorities they may have given their company and role.\\n"
-                    "3. What parts of the seller’s offering would likely resonate with them, and why."
-                )
+    "You are helping a sales rep prepare for a hyper-personalized outreach.\n\n"
+    "Here’s what you know:\n"
+    f"- Seller’s company summary: {st.session_state['seller_summary']}\n"
+    f"- Prospect’s company summary: {st.session_state['prospect_summary']}\n"
+    f"- This is the LinkedIn profile summary (first 2 pages) of the prospect they’re targeting:\n\n{text}\n\n"
+    "From this context, generate the following:\n\n"
+    "1. A list of which parts of the seller’s offering are most likely to resonate with this prospect — based on their role, company focus, and likely pain points.\n"
+    "   - Be specific and tie each part of the offering to something relevant from the prospect’s company or role.\n\n"
+    "2. Five deeply personalized discovery questions the rep could ask, each following this format:\n\n"
+    "    - **Headline**: Explain what the question is tied to (e.g., role, company initiative, career background, etc.)\n"
+    "    - **Question**: Phrase it as a conversational open-ended discovery question\n"
+    "    - **Why this hits**: Explain why this question is likely to resonate, based on the context above\n\n"
+    "Do not add fluff. These questions should be sharp, strategic, and visibly informed by the research provided."
+)
+
 
                 response = client.chat.completions.create(
                     model="gpt-3.5-turbo",
