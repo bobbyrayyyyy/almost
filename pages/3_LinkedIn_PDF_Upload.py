@@ -27,20 +27,25 @@ if uploaded_file:
                 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
                 full_prompt = (
-    "You are helping a sales rep prepare for a hyper-personalized outreach.\n\n"
-    "Here’s what you know:\n"
+    "You're helping a sales rep prepare to speak with a specific prospect. Based on the following inputs:\n\n"
     f"- Seller’s company summary: {st.session_state['seller_summary']}\n"
     f"- Prospect’s company summary: {st.session_state['prospect_summary']}\n"
-    f"- This is the LinkedIn profile summary (first 2 pages) of the prospect they’re targeting:\n\n{text}\n\n"
-    "From this context, generate the following:\n\n"
-    "1. A list of which parts of the seller’s offering are most likely to resonate with this prospect — based on their role, company focus, and likely pain points.\n"
-    "   - Be specific and tie each part of the offering to something relevant from the prospect’s company or role.\n\n"
-    "2. Five deeply personalized discovery questions the rep could ask, each following this format:\n\n"
-    "    - **Headline**: Explain what the question is tied to (e.g., role, company initiative, career background, etc.)\n"
-    "    - **Question**: Phrase it as a conversational open-ended discovery question\n"
-    "    - **Why this hits**: Explain why this question is likely to resonate, based on the context above\n\n"
-    "Do not add fluff. These questions should be sharp, strategic, and visibly informed by the research provided."
-             )
+    f"- The prospect’s LinkedIn profile summary (from the first 2 pages):\n\n\"\"\"{text}\"\"\"\n\n"
+    "Perform two tasks:\n\n"
+    "---\n\n"
+    "**PART 1: Match the Seller's Value Props to the Prospect**\n\n"
+    "List the 3–5 parts of the seller’s offering that are most likely to resonate with this prospect. For each, briefly explain *why*, based on their role, company priorities, or background.\n\n"
+    "---\n\n"
+    "**PART 2: Generate 5 Strategic Discovery Questions**\n\n"
+    "For each question, follow this exact format:\n\n"
+    "1. **Tied to [Strategic Insight]**  \n"
+    "“[Personalized, open-ended discovery question]”\n\n"
+    "**Why this hits:**  \n"
+    "[Explain why this question matters, using something specific from the prospect’s role, company initiatives, background, or the seller’s relevant capabilities.]\n\n"
+    "Examples of strategic insights: recent rebrand, operations-heavy background, regulated industry, buyer role, business growth stage, manual processes, recent acquisitions, etc.\n\n"
+    "These should feel handcrafted, deeply personalized, and grounded in the inputs provided — not generic. Avoid fluff."
+)
+
 
 
                 response = client.chat.completions.create(
