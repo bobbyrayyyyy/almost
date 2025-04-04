@@ -28,67 +28,59 @@ if uploaded_file:
                 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
                 full_prompt = (
-    "You're helping a sales rep prepare for a discovery conversation with a prospect.\n\n"
-    "The seller’s product is very specific: they help companies run impactful in-person and virtual events. Their platform covers:\n"
-    "- Registration and invitations\n"
-    "- Segmentation of attendees\n"
-    "- Email and outreach coordination\n"
-    "- Webinars and education-style events\n"
-    "- Tracking attendance and engagement\n"
-    "- Post-event analytics\n"
-    "- CRM and compliance reporting\n\n"
-    "The buyer is not shopping for software. Your job is to help the rep start a real conversation that reveals pain or opportunity around how the prospect handles any of the above.\n\n"
-    "---\n\n"
-    "You’ve already researched:\n"
-    f"- Seller’s company: {st.session_state['seller_deep_profile']}\n"
-    f"- Prospect’s company: {st.session_state['prospect_summary']}\n"
-    f"- Prospect’s LinkedIn summary (first 2 pages): \n\n\"\"\"{text}\"\"\"\n\n"
-    "---\n\n"
-    "Return two things only:\n\n"
-    "---\n\n"
-    "**PART 1: Event Use Cases That Might Resonate**\n\n"
-    "List 3–5 parts of the seller’s offering that are most likely to be valuable to this prospect — based on what their company does, what the person does, and how they probably handle external or internal communication today.\n\n"
-    "✅ Focus only on how this prospect might:\n"
-    "- Use events for outreach or education\n"
-    "- Struggle to segment audiences after a merger or acquisition\n"
-    "- Have disjointed communication across departments\n"
-    "- Need visibility into attendance or engagement\n"
-    "- Be pressured to do more client-facing work\n"
-    "- Need post-event proof for compliance or reporting\n\n"
-    "---\n\n"
-    "**PART 2: 5 Discovery Questions Around Outreach + Events**\n\n"
-    "Your goal is to write 5 smart, natural, and strategic discovery questions. They should sound like a sharp AE who did their homework — not a product marketer.\n\n"
-    "Each question should follow this format:\n\n"
-    "1. **Tied to [Strategic Insight]**  \n"
-    "“[Discovery question]”\n\n"
-    "**Why this hits:**  \n"
-    "Explain the pain it uncovers and how it connects to the seller’s offering — not by pitching, but by revealing friction they probably feel.\n\n"
-    "---\n\n"
-    "📌 Example Outputs (Use These As a Guide):\n\n"
-    "**Tied to the Rebrand + Demand Gen**  \n"
-    "“With the rebrand to Verita, how is your team thinking about building visibility or trust with new prospects through live or virtual experiences?”\n\n"
-    "**Why this hits:**  \n"
-    "Savannah’s job is to drive business development — she’ll care about brand trust, awareness, and high-quality lead engagement. Events are a huge lever for this, especially post-rebrand.\n\n"
-    "**Tied to Her Role in Growth**  \n"
-    "“What role do events or educational webinars currently play in your outreach or client conversion efforts?”\n\n"
-    "**Why this hits:**  \n"
-    "You’re connecting directly to her BD role — this lets you explore if Verita is using events as a sales or marketing channel, and where there might be inefficiencies.\n\n"
-    "**Tied to Pain Points from Rebranding**  \n"
-    "“How are you currently managing communications and invitations across your newly combined client base from the KCC, Gilardi, and RicePoint ecosystems?”\n\n"
-    "**Why this hits:**  \n"
-    "Rebranding = new challenges around messaging and segmentation. Cvent’s tools can solve that. You’re pointing right at a likely source of growing pains.\n\n"
-    "**Tied to Operational Inefficiency (her Apple ops background)**  \n"
-    "“Given your background in ops-heavy roles — what parts of running outreach or client-facing events still feel more manual than they should?”\n\n"
-    "**Why this hits:**  \n"
-    "You’re appealing to her personal lens — she likely sees inefficiencies others miss. This helps build trust and surfaces problems you can solve.\n\n"
-    "**Tied to Data/Compliance Needs**  \n"
-    "“In a space like fiduciary services, what kind of reporting or audit-readiness do you need after an event or mass communication?”\n\n"
-    "**Why this hits:**  \n"
-    "Verita is in a hyper-regulated space. They likely need proof of delivery, attendance, consent — and Cvent can deliver that. This question aligns with compliance pressure.\n\n"
-    "---\n\n"
-    "🧠 Now, generate 5 new discovery questions and value props for the current prospect. Match the structure and tone above."
-)
+                    "You're helping a sales rep prepare for a discovery conversation with a prospect.\n\n"
+                    "The seller’s product is very specific: they help companies run impactful in-person and virtual events. Their platform covers:\n"
+                    "- Registration and invitations\n"
+                    "- Segmentation of attendees\n"
+                    "- Email and outreach coordination\n"
+                    "- Webinars and education-style events\n"
+                    "- Tracking attendance and engagement\n"
+                    "- Post-event analytics\n"
+                    "- CRM and compliance reporting\n\n"
+                    "The buyer is not shopping for software. Your job is to help the rep start a real conversation that reveals pain or opportunity around how the prospect handles any of the above.\n\n"
+                    "---\n\n"
+                    "You’ve already researched:\n"
+                    f"- Seller’s company: {st.session_state['seller_deep_profile']}\n"
+                    f"- Prospect’s company: {st.session_state['prospect_summary']}\n"
+                    f"- Prospect’s LinkedIn summary (first 2 pages): \n\n\"\"\"{text}\"\"\"\n\n"
+                    "---\n\n"
+                    "Return two things only:\n\n"
+                    "---\n\n"
+                    "**PART 1: Event Use Cases That Might Resonate**\n\n"
+                    "List 3–5 parts of the seller’s offering that are most likely to be valuable to this prospect — based on what their company does, what the person does, and how they probably handle external or internal communication today.\n\n"
+                    "✅ Focus only on how this prospect might:\n"
+                    "- Use events for outreach or education\n"
+                    "- Struggle to segment audiences after a merger or acquisition\n"
+                    "- Have disjointed communication across departments\n"
+                    "- Need visibility into attendance or engagement\n"
+                    "- Be pressured to do more client-facing work\n"
+                    "- Need post-event proof for compliance or reporting\n\n"
+                    "---\n\n"
+                    "**PART 2: 5 Discovery Questions Around Outreach + Events**\n\n"
+                    "Write 5 conversational discovery questions tied to:\n"
+                    "- How they run outreach or education today\n"
+                    "- Where their audience coordination breaks down\n"
+                    "- What they do when they need people to show up or respond\n"
+                    "- What manual lift exists in running events or trainings\n"
+                    "- How they handle post-event follow-up or compliance\n\n"
+                    "Each question should follow this format:\n\n"
+                    "1. **Tied to [Real Insight You Noticed]**  \n"
+                    "“[Sales-relevant discovery question — focus on outreach, engagement, or event coordination friction]”\n\n"
+                    "**Why this hits:**  \n"
+                    "Explain the real pain it uncovers — and how that could point to using events to coordinate, educate, or track.\n\n"
+                    "---\n\n"
+                    "Do not summarize anything. Go straight to the outputs. Be specific, grounded, and tied to what the seller actually sells."
+                )
 
+                response = client.chat.completions.create(
+                    model="gpt-3.5-turbo",
+                    messages=[
+                        {"role": "system", "content": "You're a B2B sales strategy assistant."},
+                        {"role": "user", "content": full_prompt}
+                    ],
+                    temperature=0.9,
+                    max_tokens=1000
+                )
 
                 st.markdown(response.choices[0].message.content.strip())
 
@@ -97,5 +89,8 @@ if uploaded_file:
 
         except Exception as e:
             st.error(f"Error processing PDF: {e}")
+else:
+    st.info("Please upload a LinkedIn PDF to begin.")
+
 else:
     st.info("Please upload a LinkedIn PDF to begin.")
