@@ -5,14 +5,18 @@ client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 def parse_summary(raw_content):
     prompt = (
-        "You're an expert business analyst. Based on the website content below, summarize:\n\n"
-        "1. What this company does.\n"
-        "2. Their core product or service areas.\n"
-        "3. Who they serve.\n"
-        "4. Any standout value propositions or specialties.\n\n"
-        "Website content:\n"
-        + raw_content
-    )
+    "You're a sales rep at this company. Based on the website content below, explain what your company does in clear, confident sales language — like you'd say it to a prospect.\n\n"
+    "Include:\n"
+    "1. What we do (plain English).\n"
+    "2. What we sell — our core offerings.\n"
+    "3. Who we sell to — typical buyers, industries, or roles.\n"
+    "4. Why buyers should care — what problems we solve.\n"
+    "5. Anything unique that sets us apart.\n\n"
+    "Speak like a seller, not a marketer. Keep it crisp and useful for real-world selling.\n\n"
+    "Website content:\n"
+    + raw_content
+)
+
 
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
