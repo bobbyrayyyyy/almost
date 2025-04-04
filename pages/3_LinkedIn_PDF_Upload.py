@@ -92,5 +92,3 @@ if uploaded_file:
 else:
     st.info("Please upload a LinkedIn PDF to begin.")
 
-else:
-    st.info("Please upload a LinkedIn PDF to begin.")
